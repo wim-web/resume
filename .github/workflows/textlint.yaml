@@ -14,12 +14,17 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3.0.2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v3.0.0
         with:
-          node-version: "17"
-      - name: textlint-github-pr-check
-        uses: tsuyoshicho/action-textlint@v3
+          node-version: "18"
+      - run: yarn install
+      - uses: reviewdog/action-setup@v1.0.3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          textlint_flags: "src/work.md"
+          reviewdog_version: latest
+      - name: textlint work.md
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx textlint -f checkstyle "./src/work.md" | \
+          reviewdog -f=checkstyle -name="textlint" -reporter=github-pr-review -diff="git diff ${{ github.event.pull_request.base.ref }}"
