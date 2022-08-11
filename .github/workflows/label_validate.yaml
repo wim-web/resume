@@ -1,0 +1,15 @@
+---
+name: validate label
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: jesusvasquez333/verify-pr-label-action@v1.4.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          valid-labels: "major, minor, patch"
