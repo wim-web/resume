@@ -1,1 +1,77 @@
-# Test
+# 職務経歴書
+
+## 基本情報
+
+- GitHub: https://github.com/wim-web
+- Zenn: https://zenn.dev/wim
+- Qiita: https://qiita.com/wim
+
+## 技術スキル
+
+- PHP
+- Laravel
+- AWS
+    - EC2,RDS,ECS,Lambda,Athenaなど
+    - 複数アカウントの管理
+- Terraform
+- CI
+    - GitHub Actions
+    - CircleCI
+
+## 職務経歴
+
+在籍期間 | 企業名 | ロール
+--- | --- | --- |
+2021/12 - 現在 | 株式会社トラーナ | SRE/バックエンドエンジニア
+2019/07 - 2021/11 | 株式会社insprout | バックエンドエンジニア
+
+### 株式会社トラーナ: 2021/12 - 現在
+
+バックエンドエンジニアとして入社後、PHP/Laravelで開発していました。4月からSREチームが新設されたため、SREチームでSREとして活動しています。
+
+#### 技術スタック
+
+- PHP
+- Laravel
+- Terraform
+- GitHub Actions
+- Datadog
+- AWS
+
+#### SREとしての活動
+
+SREチーム新設時はSREとして働いた経験がない3名でのスタートでしたので、[SRE サイトリライアビリティエンジニアリング](https://www.oreilly.co.jp/books/9784873117911/)の輪読会などを通じてSREへの理解を深めつつ活動しています。  
+個人としては、Datadogの整備やTerraform周りの整備(Module化、Terraform Cloudの導入、ステート分割など)をしています。
+### 株式会社insprout: 2019/07 - 2021/11
+
+バックエンドエンジニアとして主にPHP/Laravelでの開発、AWSやミドルウェアの調整などを行っていました。
+
+#### 技術スタック
+
+- PHP
+- Laravel
+- Go
+- Python
+- Terraform
+- AWS
+    - EC2,RDS,Lambda,Athena,Glue,API GW
+
+#### 機能のサーバーレス化
+
+ある機能がEC2上のバッチで動いていましたが、ほかの処理の影響で処理が止まり障害が発生しました。   
+バッチサーバーがシングルAZなことや、機能の重要性、1日のリクエスト数が多くないことと、アプリケーションの性質上スパイクする可能性がある、などを考慮してGoを載せたLambdaへと機能を移植しました。  
+Step Functionsを使うことで自動リトライするエラーとそうでないエラーの際に処理を分けています。
+
+インフラではTerraformを使用し、Terraform Cloudを利用した自動ApplyやGitのpre commitでモジュールのREADMEを自動で生成するしくみなどを整えました。
+
+- [LambdaのエラーをStep Functionsでハンドリングする](https://zenn.dev/wim/articles/handle_lambda_errors_with_step_functions)
+
+#### 社内AWSマルチアカウント基盤の作成
+
+会社のAWSアカウントが1アカウントで運用されておりdev, prd,sandboxなどが入り混じっていたので、AWSのLanding Zoneを参考にマルチアカウント運用基盤を整備しました。
+
+AWSではマルチアカウントの環境構築としてControl Towerというサービスがありますが、東京リージョンで提供されていなかったので自分でTerraformを書いて構築をしました。
+
+Terraform Cloudと連携してPR時にPlanが走りmerge時にApplyされるようにCI/CDを構築したので、数行追加するだけでLanding ZoneにのっとったAWSアカウントの作成を誰もができるようになりました。
+
+- [TerraformでAWSのマルチアカウント環境を整備する](https://zenn.dev/wim/articles/aws_landing_zone_with_terraform)
