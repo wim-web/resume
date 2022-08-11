@@ -14,7 +14,31 @@ jobs:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.release-drafter.outputs.upload_url }}
     steps:
       - uses: release-drafter/release-drafter@v5.20.0
+        id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  generate_and_upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [update_release_draft]
+    steps:
+      - uses: actions/checkout@v3.0.2
+      - name: generate pdf
+        run: |
+          docker run --rm -v $(pwd)/src:/src -w /src ghcr.io/wim-web/resume-md_to_pdf:latest \
+            work.md --config-file config.js --stylesheet style.css \
+            --launch-options '{ "args": ["--no-sandbox"], "executablePath": "/usr/bin/chromium-browser" }'
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.update_release_draft.outputs.upload_url }}
+          asset_path: src/work.pdf
+          asset_name: work.pdf
+          asset_content_type: application/pdf
