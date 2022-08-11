@@ -1,7 +1,7 @@
 name: Release Drafter
 
 on:
-  push:
+  pus:
     branches:
       - master
 
