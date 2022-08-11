@@ -1,0 +1,20 @@
+---
+name: Run typos
+
+on:
+  pull_request:
+# caluculate
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typos:
+    name: Run typos
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+      - name: typos
+        uses: crate-ci/typos@v1.10.3
