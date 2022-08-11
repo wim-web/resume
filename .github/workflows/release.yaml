@@ -1,11 +1,11 @@
 name: Release Drafter
 
 on:
-  pus:
+  push:
     branches:
       - master
 
-permissions:
+permission:
   contents: read
 
 jobs:
