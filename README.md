@@ -1,16 +1,5 @@
 # 職務経歴書Repo
 
-## md-to-pdf docker
+[職務経歴書(md)](./src/work.md)
 
-### do use
-
-```bash
-docker run --rm -it ghcr.io/wim-web/resume-md_to_pdf:latest -v
-```
-
-### do build
-
-```bash
-git tag docker-v0.1.0
-git push origin docker-v0.1.0
-```
+[職務経歴書(releases)](https://github.com/wim-web/resume/releases)
