@@ -3,7 +3,7 @@ name: Run typos
 
 on:
   pull_request:
-# caluculate
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
