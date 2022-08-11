@@ -1,0 +1,17 @@
+---
+name: renovate config validate
+
+on:
+  pull_request:
+    paths:
+      - renovate.json
+
+jobs:
+  validate:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.2
+      - uses: rinchsan/renovate-config-validator@v0.0.11
+        with:
+          pattern: "renovate.json"

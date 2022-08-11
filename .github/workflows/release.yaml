@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   update_release_draft:
+    timeout-minutes: 10
     permissions:
       contents: write
       pull-requests: write
@@ -23,6 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   generate_and_upload:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     permissions:
       contents: write
