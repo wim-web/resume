@@ -1,0 +1,5 @@
+{
+    "extends": [
+        "local>wim-web/renovate-config"
+    ]
+}
