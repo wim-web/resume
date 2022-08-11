@@ -13,3 +13,4 @@ jobs:
       - uses: reviewdog/action-actionlint@v1.27.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
