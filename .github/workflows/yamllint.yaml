@@ -1,21 +1,24 @@
 ---
-name: actionlint with reviewdog
+name: yamllint
 
 on:
   pull_request:
+    paths:
+      - "**.ya?ml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  actionlint:
+  run:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3.0.2
-      - uses: reviewdog/action-actionlint@v1.27.0
+      - name: Run yamllint with reviewdog
+        uses: reviewdog/action-yamllint@v1.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          fail_on_error: true
           reporter: github-pr-review
+          fail_on_error: true
