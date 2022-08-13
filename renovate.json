@@ -13,5 +13,8 @@
             ],
             "datasourceTemplate": "npm"
         }
+    ],
+    "labels": [
+        "patch"
     ]
 }
