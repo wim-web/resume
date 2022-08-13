@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+      release_id: ${{ steps.release-drafter.outputs.id }}
     steps:
       - uses: release-drafter/release-drafter@v5.20.0
         id: release-drafter
@@ -29,18 +30,45 @@ jobs:
     permissions:
       contents: write
     needs: [update_release_draft]
+    env:
+      asset_name: work.pdf
+      asset_path: src/work.pdf
+      asset_content_type: application/pdf
     steps:
       - uses: actions/checkout@v3.0.2
+
       - name: generate pdf
         run: |
           docker run --rm -v $(pwd)/src:/src -w /src ghcr.io/wim-web/resume-md_to_pdf:latest \
             work.md --config-file config.js --stylesheet style.css \
             --launch-options '{ "args": ["--no-sandbox"], "executablePath": "/usr/bin/chromium-browser" }'
+
       - uses: actions/upload-release-asset@v1
+        id: upload
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.update_release_draft.outputs.upload_url }}
-          asset_path: src/work.pdf
-          asset_name: work.pdf
-          asset_content_type: application/pdf
+          asset_path: ${{ env.asset_path }}
+          asset_name: ${{ env.asset_name }}
+          asset_content_type: ${{ env.asset_content_type }}
+
+      - name: Remove asset
+        if: steps.upload.outcome == 'failure'
+        uses: flcdrg/remove-release-asset-action@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ needs.update_release_draft.outputs.release_id }}
+          asset_name: ${{ env.asset_name }}
+
+      - uses: actions/upload-release-asset@v1
+        if: steps.upload.outcome == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.update_release_draft.outputs.upload_url }}
+          asset_path: ${{ env.asset_path }}
+          asset_name: ${{ env.asset_name }}
+          asset_content_type: ${{ env.asset_content_type }}
