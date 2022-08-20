@@ -19,7 +19,7 @@ jobs:
       upload_url: ${{ steps.release-drafter.outputs.upload_url }}
       release_id: ${{ steps.release-drafter.outputs.id }}
     steps:
-      - uses: release-drafter/release-drafter@v5.20.0
+      - uses: release-drafter/release-drafter@v5.20.1
         id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
