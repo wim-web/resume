@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3.1.0
-      - uses: reviewdog/action-actionlint@v1.34.0
+      - uses: reviewdog/action-actionlint@v1.34.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
