@@ -6,7 +6,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "md-to-pdf": "5.2.0",
+        "md-to-pdf": "5.2.1",
         "@proofdict/textlint-rule-proofdict": "3.1.2",
         "textlint": "12.2.4",
         "textlint-rule-preset-icsmedia": "github:ics-creative/textlint-rule-preset-icsmedia",
