@@ -17,6 +17,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: typos
-        uses: crate-ci/typos@ccdede0f8c1e877aa3248b9c837f3f9b0abbbdf9 # v1.15.10
+        uses: crate-ci/typos@7c89b528fdb59c3cdee63aa37cd51e786786f3ed # v1.16.11
         with:
           files: ". .github"
