@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+      release_id: ${{ steps.release-drafter.outputs.id }}
+    steps:
+      - uses: release-drafter/release-drafter@v5.24.0
+        id: release-drafter
+        with:
+          publish: true
+          tag: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  generate_and_upload:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [update_release_draft]
+    env:
+      asset_name: work.pdf
+      asset_path: src/work.pdf
+      asset_content_type: application/pdf
+    steps:
+      - uses: actions/checkout@v3.5.3
+
+      - name: generate pdf
+        run: |
+          ./scripts/build_docker.bash
+          ./scripts/generate_pdf.bash
+
+      - uses: actions/upload-release-asset@v1
+        id: upload
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.update_release_draft.outputs.upload_url }}
+          asset_path: ${{ env.asset_path }}
+          asset_name: ${{ env.asset_name }}
+          asset_content_type: ${{ env.asset_content_type }}

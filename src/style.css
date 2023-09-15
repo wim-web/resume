@@ -1,0 +1,41 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
+body {
+  font-family: "Noto Sans Japanese", sans-serif;
+  font-size: 12px;
+}
+
+h1:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+th {
+  background-color: lightgrey;
+}
+
+ul, ol {
+  padding-left: 25px;
+}
