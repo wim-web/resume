@@ -19,7 +19,7 @@ jobs:
       upload_url: ${{ steps.release-drafter.outputs.upload_url }}
       release_id: ${{ steps.release-drafter.outputs.id }}
     steps:
-      - uses: release-drafter/release-drafter@v5.24.0
+      - uses: release-drafter/release-drafter@65c5fb495d1e69aa8c08a3317bc44ff8aabe9772 # v5.24.0
         id: release-drafter
         with:
           publish: true
@@ -38,14 +38,14 @@ jobs:
       asset_path: src/work.pdf
       asset_content_type: application/pdf
     steps:
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
 
       - name: generate pdf
         run: |
           ./scripts/build_docker.bash
           ./scripts/generate_pdf.bash
 
-      - uses: actions/upload-release-asset@v1
+      - uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
         id: upload
         continue-on-error: true
         env:
