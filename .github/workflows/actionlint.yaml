@@ -1,0 +1,23 @@
+---
+name: actionlint with reviewdog
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3.5.3
+      - uses: reviewdog/action-actionlint@v1.37.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_error: true
+          reporter: github-pr-review
