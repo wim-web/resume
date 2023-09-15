@@ -1,0 +1,32 @@
+version: 1
+
+imports:
+  - path: ./node_modules/textlint-rule-preset-icsmedia/dict/prh.yml
+
+rules:
+  - expected: VSCode
+    pattern: /\bvs\s?code\b/i
+    specs:
+      - from: vscode
+        to: VSCode
+      - from: VScode
+        to: VSCode
+      - from: vs code
+        to: VSCode
+  - expected: Terraform Cloud
+    pattern: /\bterraform\s?cloud\b/i
+    specs:
+      - from: terraform cloud
+        to: Terraform Cloud
+      - from: terraformCloud
+        to: Terraform Cloud
+  - expected: PHP
+    pattern:  /\bphp\b/i
+    specs:
+      - from: php
+        to: PHP
+  - expected: Golang
+    pattern: /\bgolang\b/i
+    specs:
+      - from: golang
+        to: Golang
