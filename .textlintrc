@@ -1,0 +1,20 @@
+{
+  "filters": {},
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-weak-phrase": false,
+      "max-comma": false,
+      "max-ten": false
+    },
+    "prh": {
+      "rulePaths": [
+        "./prh.yml"
+      ]
+    },
+    "@proofdict/proofdict": {
+      "dictURL": "https://azu.github.io/proof-dictionary/"
+    }
+  }
+}
