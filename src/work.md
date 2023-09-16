@@ -4,7 +4,7 @@
 
 バックエンド約3年、SRE約1年経験してきました。現職ではEnablingチームとしてインフラやIaC環境の整備などを行っています。（領域的にはSREやDevOps辺りになります。）
 
-バックエンドは主にPHP/Laravelを使用し、[LaravelでN+1を解決するために雰囲気でeager loadを使っている](https://qiita.com/wim/items/66ae4e3a58427f86cb5f)のようにLaravel内部のコードを理解した上で実装を行ったり、[負荷試験のふの字も知らないエンジニアが負荷試験をやってみる（Laravel）](https://zenn.dev/wim/articles/laravel_load-test)のようにミドルウェア・インフラまで含めた運用や改善などを行ったりしてきました。
+バックエンドは主にPHP/Laravelを使用し、[LaravelでN+1を解決するために雰囲気でeager loadを使っている](https://qiita.com/wim/items/66ae4e3a58427f86cb5f)のようにLaravel内部のコードを理解した上で実装したり、[負荷試験のふの字も知らないエンジニアが負荷試験をやってみる（Laravel）](https://zenn.dev/wim/articles/laravel_load-test)のようにミドルウェア・インフラまで含めた運用や改善などを行ったりしてきました。
 
 SREとしては地道に整備していくフェーズが多く、[サービス信頼性階層](https://sre.google/sre-book/part-III-practices/#fig_part-practices_reliability-hierarchy)でいうMonitoring, Incident Response, Postmortemを整備したり、TerraformのCI/CDを整えることで誰でもTerraformを実行できるようにしたりといったことを行ってきました。
 
@@ -24,13 +24,13 @@ PHP / Laravel / Go / AWS / Terraform / GitHub Actions / Renovate / Datadog
 
 ## クラフトバンク株式会社 2023/07 - xxxx/xx
 
-Enablingチームに所属しておりSREやDevOps、クラウドインフラを中心に活動しています。SREと呼称していないのはSREは開発者全員が行うべきものだという点、チーム名にSREとつけることでSREが特別なポジションになるのを避けたかった点があります。
+Enablingチームに所属しておりSREやDevOps、クラウドインフラを中心に活動しています。SREと呼称していない理由はすべての開発者がSREの役割を果たすべきだと考える点、チーム名にSREとつけることでSREが特別なポジションになるのを避けたかった点などがあります。
 
 入社時の会社の課題としては、IaC化されていないことによるインフラ管理の不透明さやIPOに対応できるAWSアカウントの運用などでそこを中心に改善しているところです。
 
 ### インフラ構成のTerraform化
 
-既存の構成をTerraformに落とし込みつつ問題点の洗い出しも行っています。各環境で差分が少なくある程度気軽に複数環境を構築したいといった背景もあるので、moduleを使って共通化をしつつ、Github Actionsを整えて開発者でもコミットできるような環境を作成しています。
+既存の構成をTerraformに落とし込みつつ問題点の洗い出しも行っています。各環境で差分が少なくある程度気軽に複数環境を構築したいといった背景もあるので、moduleを使って共通化をしつつ、GitHub Actionsを整えて開発者でもコミットできるような環境を作成しています。
 
 ### AWSアカウントのマルチアカウント化
 
@@ -62,33 +62,32 @@ SREチームには自分を含めて3人所属をしていましたが全員SRE�
 ### AWSアカウントの整備
 
 1アカウントで運用していたので、AWS Organizations, Control Tower, SSOを導入し、マルチアカウントで運用するように変更しました。  
-IPO対応として本番アカウントを分離し権限をReadに絞った上で、必要に応じてChange Managerで申請することで権限付与・DBアカウントの自動生成などを実装しました。
-
+IPO対応として本番アカウントを分離し権限をReadに絞り、必要に応じてChange Managerで申請することによって権限付与・DBアカウントの自動生成などを実装しました。
 
 ## 株式会社insprout 2019/07 - 2021/11
 
-受託会社だったため新規プロジェクト3件と既存プロジェクト1件を担当しました。基本的な構成は一緒でEC2上でLaravelを使用したスタンダードな構成です。人数もおおよそ1-3名ほどで開発をしていました。
+受託会社だったため新規プロジェクト3件と既存プロジェクト1件を担当しました。基本的な構成はEC2上でLaravelを使用したスタンダードな構成です。人数もおおよそ1-3名ほどで開発をしていました。
 
 ### CMSとAPIの開発
 
 CMSの管理画面とアプリへのAPIの開発が主な業務になります。リリースして半年ほど経ったものを前任者から引き継ぎをし、新規機能の追加やバグの修正、パフォーマンス向上などの運用保守を担当しました。
 
-管理画面の権限の種類を2種類から増やしたい要件があったので権限周りを拡張するためにテーブル設計から取り掛かりました。[casbin](https://casbin.org/ja/)などのライブラリの使用も検討しましたが、テーブル構造やカラム名が固定だったりと要件と合わなかったため自作しました。  基本的にはRBAC(ロールベース)で作成しましたがABAC(属性ベース)で制御したい箇所もあったため、ABACでも拡張できるように実装しました。
+管理画面の権限の種類を2種類から増やしたい要件があったので権限周りを拡張するためにテーブル設計から取り掛かりました。[casbin](https://casbin.org/ja/)などのライブラリの使用も検討しましたが、テーブル構造やカラム名が固定など要件と合わなかったため自作しました。  基本的にはRBAC(ロールベース)で作成しましたがABAC(属性ベース)で制御したい箇所もあったため、ABACでも拡張できるように実装しました。
 
 PHPやLaravelのチューニングがされていなかったので、OPCacheやLaravelのキャッシュの導入をしてレスポンスなどの改善を図りました。結果、CPU使用率を約半分、レイテンシを100msほど短縮することに成功しました。（[負荷試験のふの字も知らないエンジニアが負荷試験をやってみる（Laravel）](https://zenn.dev/wim/articles/laravel_load-test)）
 
 ### AWSマルチアカウント化
 
-ここで初めてのAWSマルチアカウント運用を開始しました。このときはControl Towerが東京リージョンで提供されていなかったので自分でTerraformを書いてLanding Zoneの構築を行いました。[TerraformでAWSのマルチアカウント環境を整備する](https://zenn.dev/wim/articles/aws_landing_zone_with_terraform)
+ここではじめてのAWSマルチアカウント運用を開始しました。このときはControl Towerが東京リージョンで提供されていなかったので自分でTerraformを書いてLanding Zoneの構築をしました。[TerraformでAWSのマルチアカウント環境を整備する](https://zenn.dev/wim/articles/aws_landing_zone_with_terraform)
 
 ### 機能の分離(サーバーレス化)
 
-他の処理の影響で重要な処理が止まる事象が2回ほど起きてしまい、バッチサーバーがシングルAZなこともあり機能を別サービスとして切り出すことになりました。おおまかな構成としては以下になります。
+他の処理の影響で、重要な処理が止まるという事象が2回発生しました。このため、アーキテクチャの見直しを行いました。おおまかな構成としては以下になります。
 
 API Gateway -> Step Functions(lambda) -> SNS -> Firehose -> S3 -> Glue -> S3 -> Athena
 
 - Lambda
-    - EC2をMulti-AZに配置するのに比べてスケールが楽、現状リクエスト数は1日平均でみると多くないがアプリの性質上ある程度のスパイクがあってもスケールしてほしいため。
+    - Multi-AZでEC2を構築するのに比べてスケールが楽、現状リクエスト数は1日平均でみると多くないがアプリの性質上ある程度のスパイクがあってもスケールしてほしいため。
     - 1日で見るとリクエスト数が多くないのでコスト面で有利になるため。
 - Step Functions
     - Lambdaだけでは細かなエラー処理やリトライ処理ができないのでStep Functionsで処理するため。[LambdaのエラーをStep Functionsでハンドリングする](https://zenn.dev/wim/articles/handle_lambda_errors_with_step_functions)
