@@ -12,6 +12,11 @@ concurrency:
 
 jobs:
   textlint:
+    permissions:
+      checks: write
+      contents: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
