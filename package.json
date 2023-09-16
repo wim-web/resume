@@ -8,5 +8,8 @@
         "textlint-rule-prh": "5.3.0",
         "textlint-rule-proofdict": "2.0.4",
         "textlint-rule-spellcheck-tech-word": "5.0.0"
+    },
+    "dependencies": {
+        "markdownlint-cli2": "^0.9.2"
     }
 }
