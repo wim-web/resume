@@ -10,4 +10,4 @@ registries:
 - type: standard
   ref: v4.80.0 # renovate: depName=aquaproj/aqua-registry
 packages:
-- name: crate-ci/typos@v1.16.21
+- name: crate-ci/typos@v1.16.22
