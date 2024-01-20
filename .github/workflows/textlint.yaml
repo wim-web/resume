@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: "18"
       - run: yarn install
-      - uses: reviewdog/action-setup@80a06617492b461a66508e2dedf16233f0506804 # v1.0.6
+      - uses: reviewdog/action-setup@154bb4214db7d87bdb814a346ec67b3472fe1c5f # v1.1.0
         with:
           reviewdog_version: latest
       - name: textlint work.md
