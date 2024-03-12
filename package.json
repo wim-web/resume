@@ -2,7 +2,7 @@
     "name": "resume",
     "devDependencies": {
         "@proofdict/textlint-rule-proofdict": "3.1.2",
-        "textlint": "13.4.1",
+        "textlint": "14.0.4",
         "textlint-rule-preset-icsmedia": "github:ics-creative/textlint-rule-preset-icsmedia",
         "textlint-rule-preset-ja-technical-writing": "8.0.0",
         "textlint-rule-prh": "5.3.0",
